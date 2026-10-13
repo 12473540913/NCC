@@ -370,7 +370,11 @@
   /* ================= Boot sequence ================= */
   // Always start at the very top: stop the browser from restoring a previous scroll position.
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  const toTop = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  const scroller = document.getElementById("scroller");
+  const toTop = () => {
+    scroller.scrollTop = 0;
+    window.scrollTo(0, 0);
+  };
   toTop();
   window.addEventListener("pageshow", toTop);
 
@@ -402,23 +406,23 @@
 
     await new Promise((r) => enter.addEventListener("click", r, { once: true }));
 
-    // Stage 3: collapse into a calm galaxy, then reveal the text.
+    // Stage 3: lock position at the top, collapse into a calm galaxy, then reveal the text.
+    toTop();
     enter.remove();
     galaxy.setHover(false);
     const calmed = galaxy.calmDown();
     await sleep(reducedMotion ? 0 : 1600);
-    toTop();
-    document.body.classList.remove("locked");
-    toTop();
 
-    const items = [
-      document.getElementById("title"),
-      ...document.querySelectorAll("#description .panel"),
-      document.getElementById("flag"),
-    ];
+    const title = document.getElementById("title");
+    title.classList.add("shown");
+    await sleep(reducedMotion ? 0 : 1400);
+    // Title is fully rendered — now let the user scroll.
+    scroller.classList.remove("locked");
+
+    const items = [...document.querySelectorAll("#description .panel"), document.getElementById("flag")];
     for (const el of items) {
       el.classList.add("shown");
-      await sleep(reducedMotion ? 0 : el.id === "title" ? 1400 : 950);
+      await sleep(reducedMotion ? 0 : 950);
     }
     await calmed;
   })();

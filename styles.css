@@ -82,9 +82,26 @@ body {
   opacity: 1;
 }
 
-html:has(body.locked),
-body.locked {
+html,
+body {
+  height: 100%;
   overflow: hidden;
+}
+
+/* The only scrolling element. Its scrollbar space is always reserved, so locking/unlocking
+   never changes the layout width — no horizontal shift, no canvas stretch. */
+#scroller {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
+  overscroll-behavior: contain;
+}
+
+#scroller.locked {
+  overflow-y: hidden;
 }
 
 /* Invisible circular hit area over the black hole */
