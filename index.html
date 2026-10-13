@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NCC — No Copyright Code</title>
+  <meta name="description" content="NCC (No Copyright Code): non-commercial projects built with AI to improve quality of life for all humans." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/favicon/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="icon" href="assets/favicon/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="assets/favicon/favicon-48x48.png" type="image/png" sizes="48x48" />
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="assets/favicon/site.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="locked">
+  <!-- Loader: 3D spinning rings -->
+  <div id="loader" aria-label="Loading">
+    <canvas id="rings"></canvas>
+  </div>
+
+  <!-- Background galaxy -->
+  <canvas id="galaxy" aria-hidden="true"></canvas>
+
+  <!-- Click target over the black hole's center -->
+  <button id="enter" type="button" aria-label="Enter NCC" hidden></button>
+
+  <!-- Film grain + vignette for an old-print feel -->
+  <div id="grain" aria-hidden="true"></div>
+  <div id="vignette" aria-hidden="true"></div>
+
+  <main id="content">
+    <header id="title" class="reveal">
+      <h1 class="title-main">NCC</h1>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="title-sub">No Copyright Code</p>
+    </header>
+
+    <div id="description">
+      <section class="panel reveal">
+        <p>
+          NCC — No Copyright Code — is my personal brand and the home for everything I build.
+          It is based upon a trivial premise: make useful things for the sole sake of improving the world.
+        </p>
+      </section>
+
+      <section class="panel reveal">
+        <p>
+          Most of my projects under the NCC guise are generated with great assistance and leadership from AI.
+          I bring the questions, the direction, and the stubbornness to finish; AI brings speed, breadth,
+          and a tireless willingness to try one more approach until everything works. Together, we turn
+          ideas into working tools.
+        </p>
+      </section>
+
+      <section class="panel reveal">
+        <p>
+          None of this is built for a commercial purpose. There are no subscriptions, no paywalls, and no
+          hidden agenda. The code exists to be read, used, changed, and shared by anyone who finds it helpful.
+        </p>
+        <p>
+          The goal is to improve quality of life for all humans — whether that means saving someone a few
+          minutes each day, solving a frustrating problem, or simply showing what is possible when people
+          and machines work side by side.
+        </p>
+      </section>
+
+      <section class="panel reveal">
+        <p>
+          NCC is also part of my unending pursuit of life's purpose. Building, learning, and giving back are
+          how I search for meaning, and every project is another step along that path.
+        </p>
+        <p>
+          Thank you for being here. Take what helps you, and pass it on.
+        </p>
+      </section>
+    </div>
+
+    <figure id="flag" class="reveal">
+      <img src="assets/flag.jpg" alt="NCC flag" />
+    </figure>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

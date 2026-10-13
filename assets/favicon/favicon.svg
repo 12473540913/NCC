@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .bg { fill: #000; }
+    .ring { stroke: #fff; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #fff; }
+      .ring { stroke: #000; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="12"/>
+  <g fill="none" stroke-width="2.5">
+    <ellipse class="ring" cx="32" cy="32" rx="26" ry="10" opacity="1"/>
+    <ellipse class="ring" cx="32" cy="32" rx="26" ry="10" opacity="0.7" transform="rotate(60 32 32)"/>
+    <ellipse class="ring" cx="32" cy="32" rx="26" ry="10" opacity="0.45" transform="rotate(-60 32 32)"/>
+  </g>
+</svg>
