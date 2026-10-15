@@ -127,6 +127,8 @@
     const BURST_SPEED = 16;
     // Extra speed multiplier when the pointer is right at the center (before the click).
     const PROXIMITY_BOOST = 7;
+    // Shared angular boost keeps the outer arms responsive despite differential rotation.
+    const PROXIMITY_ARM_SPEED = 0.6;
     let burst = 0;
     let proximity = 0;
     let proximityTarget = 0;
@@ -197,7 +199,8 @@
       const dt = Math.min(0.05, last ? (ms - last) / 1000 : 0.016) * (reducedMotion ? 0 : 1);
       last = ms;
       if (calmStart !== null) {
-        const p = Math.min(1, (ms - calmStart) / CALM_MS);
+        // A frame's timestamp can precede the click handler's performance.now().
+        const p = Math.max(0, Math.min(1, (ms - calmStart) / CALM_MS));
         calm = easeInOut(p);
         // Rises fast right after the click, peaks early, then winds down into the calm state.
         burst = Math.pow(Math.sin(Math.PI * Math.pow(p, 0.6)), 2);
@@ -206,6 +209,7 @@
       proximity += (proximityTarget * (1 - calm) - proximity) * Math.min(1, dt * 3);
       const boost = 1 + PROXIMITY_BOOST * proximity;
       const speed = (IDLE_SPEED * (1 - calm) * boost + 0.6 * calm + BURST_SPEED * burst);
+      const armSpeed = PROXIMITY_ARM_SPEED * proximity * (1 - calm);
       hover += (hoverTarget - hover) * 0.12;
 
       const { w, h } = size;
@@ -243,7 +247,7 @@
       const dim = 1 - 0.35 * calm;
       for (let i = 0; i < stars.length; i++) {
         let s = stars[i];
-        s.angle += (0.0072 + 3 / (s.r + 60)) * dt * speed;
+        s.angle += ((0.0072 + 3 / (s.r + 60)) * speed + armSpeed) * dt;
         s.r -= (1.2 + 900 / s.r) * dt * (1 - calm) * (IDLE_SPEED * boost + BURST_SPEED * burst);
         if (s.r < holeR * 1.2) {
           s = stars[i] = makeStar(i, maxR * (0.75 + Math.random() * 0.25));
